@@ -1,6 +1,13 @@
 #!/bin/bash -ex
 
-sudo launchctl unload "/Library/LaunchAgents/com.spuf.loginquote.plist"
-sudo cp "com.spuf.loginquote.plist" "/Library/LaunchAgents/com.spuf.loginquote.plist"
-sudo launchctl load -F "/Library/LaunchAgents/com.spuf.loginquote.plist"
-sudo launchctl list | grep "com.spuf.loginquote"
+DIR="/usr/local/LoginQuote"
+
+mkdir -p $DIR
+cp quote.py $DIR/quote.py
+cp run.sh $DIR/run.sh
+chmod +x $DIR/run.sh
+
+launchctl unload "/Library/LaunchAgents/com.spuf.loginquote.plist"
+cp "com.spuf.loginquote.plist" "/Library/LaunchAgents/com.spuf.loginquote.plist"
+launchctl load -F "/Library/LaunchAgents/com.spuf.loginquote.plist"
+launchctl list | grep "com.spuf.loginquote"
